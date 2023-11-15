@@ -70,22 +70,21 @@ class Program
         }
     }
 
-    // Abstract class for the Journal Entry
+    //class for the Journal Entry
     public abstract class JournalEntry
     {
         public DateTime Date { get; set; }
 
-        // Abstract method for displaying the entry
+        //method for displaying the entry
         public abstract void Display();
     }
 
-    // Concrete class for prompted journal entries
+    //class for journal entry
     public class PromptedJournalEntry : JournalEntry
     {
         public string Prompt { get; set; }
         public string Response { get; set; }
 
-        // Implementation of the Display method for prompted entries
         public override void Display()
         {
             Console.WriteLine($"Date: {Date.ToShortDateString()}");
@@ -95,7 +94,7 @@ class Program
         }
     }
 
-    // Journal class to manage entries
+    //class to manage entries
     public class Journal
     {
         private List<JournalEntry> entries;
@@ -110,13 +109,13 @@ class Program
             get { return entries; }
         }
 
-        // Method to add a new entry to the journal
+        //add a new entry to the journal
         public void AddEntry(JournalEntry entry)
         {
             entries.Add(entry);
         }
 
-        // Method to display all entries in the journal
+        //display all entries in the journal
         public void DisplayEntries()
         {
             foreach (var entry in entries)
@@ -125,17 +124,17 @@ class Program
             }
         }
 
-        // Method to clear all entries in the journal
+        //clear all entries in the journal
         public void ClearEntries()
         {
             entries.Clear();
         }
     }
 
-    // Class to handle writing and reading the journal to/from a file
+    // Class to handle writing and reading the journal
     public class JournalWriter
     {
-        // Method to save the journal to a file
+        //save the journal to a file
         public void SaveToFile(Journal journal, string fileName)
         {
             using (StreamWriter writer = new StreamWriter(fileName))
@@ -150,7 +149,7 @@ class Program
             }
         }
 
-        // Method to load the journal from a file
+        //load the journal from a file
         public void LoadFromFile(Journal journal, string fileName)
         {
             journal.ClearEntries();
