@@ -1,4 +1,3 @@
-// MindfulnessActivity.cs
 using System;
 using System.Threading;
 
@@ -6,11 +5,13 @@ class MindfulnessActivity
 {
     private string activityName;
     private string activityDescription;
+    protected int duration;
 
-    public MindfulnessActivity(string name, string description)
+    public MindfulnessActivity(string name, string description, int userDuration)
     {
         activityName = name;
         activityDescription = description;
+        duration = userDuration;
     }
 
     public string GetActivityName() => activityName;
@@ -19,26 +20,43 @@ class MindfulnessActivity
     public void StartActivity()
     {
         DisplayStartingMessage();
-        Thread.Sleep(3000);
         PerformActivity();
         DisplayFinishingMessage();
     }
 
     protected virtual void PerformActivity()
     {
-        // Base class implementation (to be overridden by subclasses)
+        RunForSpecifiedDuration();
+    }
+
+    private void RunForSpecifiedDuration()
+    {
+        Console.WriteLine("Activity is running...");
+        Thread.Sleep(duration * 1000); 
     }
 
     private void DisplayStartingMessage()
     {
         Console.WriteLine($"--- {activityName} ---");
         Console.WriteLine(activityDescription);
-        Console.WriteLine("Get ready to begin...");
+        Console.WriteLine($"Get ready to begin for {duration} seconds...");
+        PauseWithAnimation();
     }
 
     private void DisplayFinishingMessage()
     {
         Console.WriteLine($"Good job! You have completed {activityName}.");
-        Thread.Sleep(3000);
+        Console.WriteLine($"You spent {duration} seconds on {activityName}.");
+        PauseWithAnimation();
+    }
+
+    protected void PauseWithAnimation()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write(".");
+            Thread.Sleep(500);
+        }
+        Console.WriteLine();
     }
 }

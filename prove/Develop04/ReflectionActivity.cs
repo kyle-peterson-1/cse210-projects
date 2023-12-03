@@ -1,4 +1,3 @@
-// ReflectionActivity.cs
 using System;
 using System.Threading;
 
@@ -23,7 +22,7 @@ class ReflectionActivity : MindfulnessActivity
         "How can you keep this experience in mind in the future?"
     };
 
-    public ReflectionActivity() : base("Reflection Activity", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
+    public ReflectionActivity(int duration) : base("Reflection Activity", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.", duration)
     {
     }
 
@@ -40,7 +39,7 @@ class ReflectionActivity : MindfulnessActivity
             foreach (string question in reflectionQuestions)
             {
                 Console.WriteLine(question);
-                Thread.Sleep(1000);
+                Thread.Sleep(10000);
             }
         }
     }

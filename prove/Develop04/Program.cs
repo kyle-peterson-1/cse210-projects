@@ -1,32 +1,56 @@
-// Program.cs
 using System;
 
 class Program
 {
     static void Main()
     {
-        // Create instances of activities
-        MindfulnessActivity[] activities = {
-            new BreathingActivity(),
-            new ReflectionActivity(),
-            new ListingActivity()
-        };
-
-        // Display menu
-        Console.WriteLine("Choose an activity:");
-        for (int i = 0; i < activities.Length; i++)
+        while (true)
         {
-            Console.WriteLine($"{i + 1}. {activities[i].GetActivityName()}");
+            Console.WriteLine("Choose an activity:");
+            Console.WriteLine("1. Breathing Activity");
+            Console.WriteLine("2. Reflection Activity");
+            Console.WriteLine("3. Listing Activity");
+            Console.WriteLine("4. Quit");
+            
+            int choice;
+            do
+            {
+                Console.Write("Enter the number of the activity (or enter 4 to quit): ");
+            } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4);
+
+            if (choice == 4)
+            {
+                Console.WriteLine("Goodbye!");
+                break;
+            }
+
+            Console.Write($"Enter the duration of the selected activity in seconds: ");
+            int duration;
+            while (!int.TryParse(Console.ReadLine(), out duration) || duration <= 0)
+            {
+                Console.Write("Invalid input. Please enter a positive integer for the duration: ");
+            }
+
+            MindfulnessActivity selectedActivity;
+            switch (choice)
+            {
+                case 1:
+                    selectedActivity = new BreathingActivity(duration);
+                    break;
+                case 2:
+                    selectedActivity = new ReflectionActivity(duration);
+                    break;
+                case 3:
+                    selectedActivity = new ListingActivity(duration);
+                    break;
+                case 4:
+                    Console.WriteLine("Goodbye!");
+                    return;
+                default:
+                    throw new InvalidOperationException("Invalid choice.");
+            }
+
+            selectedActivity.StartActivity();
         }
-
-        // Get user input
-        int choice;
-        do
-        {
-            Console.Write("Enter the number of the activity: ");
-        } while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > activities.Length);
-
-        // Perform the selected activity
-        activities[choice - 1].StartActivity();
     }
 }
