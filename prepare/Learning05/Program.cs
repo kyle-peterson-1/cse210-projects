@@ -1,9 +1,29 @@
 using System;
 
-class Program
+public class Shape
 {
-    static void Main(string[] args)
+    public virtual double CalculateArea()
     {
-        Console.WriteLine("Hello Learning05 World!");
+        return 0;
+    }
+}
+
+public class Circle : Shape
+{
+    public double Radius { get; set; }
+
+    public override double CalculateArea()
+    {
+        return Math.PI * Math.Pow(Radius, 2);
+    }
+}
+
+public class Square : Shape
+{
+    public double SideLength { get; set; }
+
+    public override double CalculateArea()
+    {
+        return Math.Pow(SideLength, 2);
     }
 }
