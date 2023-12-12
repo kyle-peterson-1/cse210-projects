@@ -12,41 +12,52 @@ class Program
         Product product2 = new Product("Product2", 2, 5.99m, 3);
 
         Address address1 = new Address("123 Main St", "City1", "State1", "USA");
-        Customer customer1 = new Customer("Customer1", address1);
+        Address address2 = new Address("456 Oak St", "City2", "State2", "Canada");
+
+        Customer customer1 = new Customer("John Peterson", address1);
+        Customer customer2 = new Customer("Braden Sherwood", address2);
 
         Order order1 = new Order(new List<Product> { product1, product2 }, customer1);
+        Order order2 = new Order(new List<Product> { product2 }, customer2);
 
-        Console.WriteLine(order1.GetPackingLabel());
-        Console.WriteLine(order1.GetShippingLabel());
+        Console.WriteLine("Order 1:");
+        Console.WriteLine($"Packing Label:{Environment.NewLine}{order1.GetPackingLabel()}");
+        Console.WriteLine($"Shipping Label:{Environment.NewLine}{order1.GetShippingLabel()}");
         Console.WriteLine($"Total Price: {order1.CalculateTotalCost():C}");
+        Console.WriteLine();
+
+        Console.WriteLine("Order 2:");
+        Console.WriteLine($"Packing Label:{Environment.NewLine}{order2.GetPackingLabel()}");
+        Console.WriteLine($"Shipping Label:{Environment.NewLine}{order2.GetShippingLabel()}");
+        Console.WriteLine($"Total Price: {order2.CalculateTotalCost():C}");
     }
 }
 
 class Order
 {
-    public List<Product> Products { get; }
-    public Customer Customer { get; }
+    private readonly List<Product> products;
+    private readonly Customer customer;
 
     public Order(List<Product> products, Customer customer)
     {
-        Products = products;
-        Customer = customer;
+        this.products = products;
+        this.customer = customer;
     }
 
     public decimal CalculateTotalCost()
     {
-        decimal totalPrice = Products.Sum(product => product.Price * product.Quantity);
-        return Customer.IsInUSA() ? totalPrice + 5.00m : totalPrice + 35.00m;
+        decimal totalPrice = products.Sum(product => product.Price * product.Quantity);
+        return customer.IsInUSA() ? totalPrice + 5.00m : totalPrice + 35.00m;
     }
 
     public string GetPackingLabel()
     {
-        return string.Join(Environment.NewLine, Products.Select(product => $"{product.Name} (ID: {product.ProductId})"));
+        return string.Join(Environment.NewLine, products.Select(product => $"{product.Name} (ID: {product.ProductId})"));
     }
 
     public string GetShippingLabel()
     {
-        return $"{Customer.Name}{Environment.NewLine}{Customer.Address.GetFullAddress()}";
+        return $"{customer.Name}{Environment.NewLine}{customer.Address.GetFullAddress()}";
     }
 }
 
@@ -85,26 +96,26 @@ class Customer
 
 class Address
 {
-    public string StreetAddress {get; }
-    public string City {get; }
-    public string StateProvince {get; }
-    public string Country {get; }
+    private readonly string streetAddress;
+    private readonly string city;
+    private readonly string stateProvince;
+    private readonly string country;
 
     public Address(string streetAddress, string city, string stateProvince, string country)
     {
-        StreetAddress = streetAddress;
-        City = city;
-        StateProvince = stateProvince;
-        Country = country;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.stateProvince = stateProvince;
+        this.country = country;
     }
 
     public bool IsInUSA()
     {
-        return Country.Equals("USA", StringComparison.OrdinalIgnoreCase);
+        return country.Equals("USA", StringComparison.OrdinalIgnoreCase);
     }
 
     public string GetFullAddress()
     {
-        return $"{StreetAddress}, {City}, {StateProvince}, {Country}";
+        return $"{streetAddress}, {city}, {stateProvince}, {country}";
     }
 }
