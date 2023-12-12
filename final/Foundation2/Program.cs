@@ -1,9 +1,32 @@
+//Program 2: Encapsulation with Online Ordering
+
 using System;
+using System.Collections.Generic;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello Foundation2 World!");
+        
     }
+}
+
+class Order
+{
+
+}
+
+class Product
+{
+
+}
+
+class Customer
+{
+    
+}
+
+class Address
+{
+
 }
