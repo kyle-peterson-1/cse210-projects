@@ -69,7 +69,7 @@ class Goal
                 case nameof(EternalGoal):
                     return new EternalGoal(name, baseValue, completed);
                 case nameof(ChecklistGoal):
-                    if (values.Length >= 5) // Ensure at least 5 elements for ChecklistGoal
+                    if (values.Length >= 5) 
                     {
                         int targetCount = int.Parse(values[3]);
                         int bonusValue = int.Parse(values[4]);

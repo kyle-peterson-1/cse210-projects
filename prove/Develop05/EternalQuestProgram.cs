@@ -32,12 +32,12 @@ class EternalQuestProgram
                 {
                     Console.WriteLine($"A goal with the name '{loadedGoal.Name}' already exists.");
 
-                    // Ask the user whether to overwrite the existing goal
+                    
                     Console.Write("Do you want to overwrite it? (y/n): ");
                     string overwriteInput = Console.ReadLine();
                     if (overwriteInput.ToLower() != "y")
                     {
-                        continue; // Skip this goal
+                        continue; 
                     }
                 }
 
@@ -48,10 +48,10 @@ class EternalQuestProgram
 
     public void SaveToFile(string fileName)
     {
-        // Save user points to the first line of the file
+        
         List<string> lines = new List<string> { userPoints.ToString() };
 
-        // Save goals
+        
         lines.AddRange(goalManager.GetGoalsAsLines());
 
         File.WriteAllLines(fileName, lines);

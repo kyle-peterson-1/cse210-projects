@@ -61,10 +61,10 @@ class GoalManager
     }
     public void SaveToFile(string fileName)
     {
-        // Save user points to the first line of the file
+        
         List<string> lines = new List<string> { userPoints.ToString() };
 
-        // Save goals
+        
         lines.AddRange(goals.Select(goal => goal.GetStringRepresentation()));
 
         File.WriteAllLines(fileName, lines);

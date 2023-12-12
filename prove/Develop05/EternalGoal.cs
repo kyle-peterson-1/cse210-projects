@@ -12,7 +12,7 @@ class EternalGoal : Goal
     {
         if (!completed)
         {
-            // Eternal goals are never completed, but points are earned on recording events
+            
             return BaseValue;
         }
         return 0;
